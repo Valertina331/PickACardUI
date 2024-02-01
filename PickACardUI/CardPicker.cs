@@ -6,35 +6,13 @@ namespace PickACardUI
     class CardPicker
     {
         static Random random = new Random();
-        static string[] cards = new string[52];
-
-        static CardPicker()
-        {
-            string[] suits = { "Spades", "Hearts", "Clubs", "Diamonds" };
-            int cardCounter = 0;
-            for(int cardVal = 1; cardVal <= 13; cardVal++)
-            {
-                foreach(string cardSuit in suits)
-                {
-                    string cardName;
-                    cardName = cardVal.ToString();
-                    cards[cardCounter] = cardName + " of " + cardSuit;
-                    cardCounter++;
-                }
-            }
-            for(var i = 0; i < 52; i++)
-            {
-                Console.WriteLine(cards[i]);
-            }
-        }
 
         public static string[] PickSomeCards(int numberOfCards)
         {
             string[] pickedCards = new string[numberOfCards];
             for(int i = 0; i < numberOfCards; i++)
             {
-                // pickedCards[i] = RandomValue() + "of" + RandomSuit();
-                pickedCards[i] = RandomCard();
+                pickedCards[i] = RandomValue() + "of" + RandomSuit();
             }
             return pickedCards;
         }
@@ -65,23 +43,5 @@ namespace PickACardUI
             if (value == 3) return "Clubs";
             return "Diamonds";
         }
-        /*
-        static void Main(string[] args)
-        {
-            Console.Write("Enter the number of cards to pick: ");
-            string line = Console.ReadLine();
-            if (int.TryParse(line, out int numberOfCards))
-            {
-                foreach (string card in CardPicker.PickSomeCards(numberOfCards))
-                {
-                    Console.WriteLine(card);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Please enter a valid number.");
-            }
-        }
-        */
     }
 }
