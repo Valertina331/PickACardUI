@@ -27,12 +27,32 @@ namespace PickACardUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string[] pickedCards = CardPicker.PickSomeCards((int)numberOfCards.Value);
-            listOfCards.Items.Clear();
-            foreach (string card in pickedCards)
+            try
             {
-                listOfCards.Items.Add(card);
+                string[] pickedCards = CardPicker.PickSomeCards((int)numberOfCards.Value);
+                listOfCards.Items.Clear();
+                
+                foreach (string card in pickedCards)
+                {
+                    listOfCards.Items.Add(card);
+                }
+                UpdateRemainingCards();
+                
+                if (CardPicker.RemainingCards() == 0)
+                {
+                    MessageBox.Show("All cards have been picked.");
+                    pickCardsButton.IsEnabled = false;
+                }
+            } 
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        private void UpdateRemainingCards()
+        {
+            remainingCardsLabel.Content = $"Remaining Cards: {CardPicker.RemainingCards()}";
         }
     }
 }
