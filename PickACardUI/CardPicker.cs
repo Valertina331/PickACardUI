@@ -7,6 +7,7 @@ namespace PickACardUI
     {
         static Random random = new Random();
         static string[] cards = new string[52];
+        static int cardsLeft = 52;
 
         static CardPicker()
         {
@@ -30,11 +31,16 @@ namespace PickACardUI
 
         public static string[] PickSomeCards(int numberOfCards)
         {
+            if (numberOfCards > cardsLeft)
+            {
+                throw new InvalidOperationException("Not enough cards in the deck.");
+            }
+            
             string[] pickedCards = new string[numberOfCards];
             for(int i = 0; i < numberOfCards; i++)
             {
-                // pickedCards[i] = RandomValue() + "of" + RandomSuit();
                 pickedCards[i] = RandomCard();
+                cardsLeft--;
             }
             return pickedCards;
         }
@@ -47,41 +53,9 @@ namespace PickACardUI
             return picked;
         }
 
-        private static string RandomValue()
-        {
-            int value = random.Next(1, 14);
-            if (value == 1) return "Ace";
-            if (value == 11) return "Jack";
-            if (value == 12) return "Queen";
-            if (value == 13) return "King";
-            return value.ToString();
+        public static int RemainingCards() 
+        { 
+            return cardsLeft;
         }
-
-        private static string RandomSuit()
-        {
-            int value = random.Next(1, 5);
-            if (value == 1) return "Spades";
-            if (value == 2) return "Hearts";
-            if (value == 3) return "Clubs";
-            return "Diamonds";
-        }
-        /*
-        static void Main(string[] args)
-        {
-            Console.Write("Enter the number of cards to pick: ");
-            string line = Console.ReadLine();
-            if (int.TryParse(line, out int numberOfCards))
-            {
-                foreach (string card in CardPicker.PickSomeCards(numberOfCards))
-                {
-                    Console.WriteLine(card);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Please enter a valid number.");
-            }
-        }
-        */
     }
 }
