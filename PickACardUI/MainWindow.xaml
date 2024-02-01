@@ -15,11 +15,13 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel/>
+        <StackPanel>
+            <Label x:Name="remainingCardsLabel" Content=""/>
+        </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" >
             <Label Content="How many cards should I pick?" FontSize="20" />
-            <Slider x:Name="numberOfCards" Minimum="1" Maximum="15" TickPlacement="BottomRight" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" Foreground="Black"/>
+            <Slider x:Name="numberOfCards" Minimum="1" Maximum="52" TickPlacement="BottomRight" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" Foreground="Black"/>
         </StackPanel>
 
         <Button Grid.Row="1" Content="Pick some cards" FontSize="20"
